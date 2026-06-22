@@ -15,6 +15,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(null=True, blank=True)
+    is_featured = models.BooleanField(default=False)
     stock = models.IntegerField()
     image = models.ImageField(upload_to=get_imagepath, null=True, blank=True)
     is_active = models.BooleanField()

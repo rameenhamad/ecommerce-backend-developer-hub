@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import *
+from rest_framework.routers import DefaultRouter
+from .views import CategoryViewSet, ProductViewSet, FeaturedProductsView, InquiryView
 
-urlpatterns = [
-    path('categories/', CategoryListCreateView.as_view()),
-    path('categories/<int:pk>', CategoryDetailView.as_view()),
-    
-    path('products/', ProductListCreateView.as_view()),
-    path('products/<int:pk>', ProductDetailView.as_view()),
-    path('products/featured/', FeaturedProductsView.as_view()),
+router = DefaultRouter()
+router.register(r'category', CategoryViewSet)
+router.register(r'products', ProductViewSet)
+urlpatterns = router.urls + [
+    path('featured/', FeaturedProductsView.as_view(), name='featured-products'),
+    path('inquiry/', InquiryView.as_view(), name='inquiry'),
 ]
